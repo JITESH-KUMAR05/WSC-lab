@@ -10,6 +10,7 @@ public class VulnerableHttpServer {
             // simulated user input (query string)
             String query = exchange.getRequestURI().getQuery();
             //  Example: /submit?msg=Hello
+            exchange.getResponseHeaders().set("Content-Type","text/html" );
             String response = "<h2> User Message: " + query + "</h2>"; 
             exchange.sendResponseHeaders(200, response.length());
             OutputStream os = exchange.getResponseBody();
