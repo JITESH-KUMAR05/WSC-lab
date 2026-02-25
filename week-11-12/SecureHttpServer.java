@@ -18,7 +18,7 @@ public class SecureHttpServer {
             if(message.isEmpty()){
                 response = "<h2> Rejected: Empty message </h2>";
             }
-            else if(message.length() > 50){
+            else if(message.length() > 50){   
                 response = "<h2> Rejected: Message too long </h2>";
             }
             else if(!message.matches("[a-zA-Z0-9]+")){
@@ -27,6 +27,7 @@ public class SecureHttpServer {
             else{
                 response = "<h2> Message Accepted: " + message + "</h2>";
             }
+            exchange.getResponseHeaders().set("Content-Type","text/html" );
             exchange.sendResponseHeaders(200, response.length());
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
