@@ -12,6 +12,19 @@ public class SqlVul {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb", "root", "password");
         Statement stmt = con.createStatement();
         // vulnerable query
-        String query = 
+        String query = "SELECT * FROM users WHERE username = '" + user + "' AND password = '" + pass + "'";
+        ResultSet rs = stmt.executeQuery(query);
+
+        if (res.next()) {
+            System.out.println("Login successful!");
+        } else {
+            System.out.println("Login failed!");            
+        }
+        con.close();
+        sc.close();
     }
 }
+// compile
+// javac -cp .;mysql-connector-j-9.5.0.jar SQLInjectionDemo.java
+// Run
+// java -cp .;mysql-connector-j-9.5.0.jar SQLInjectionDemo
